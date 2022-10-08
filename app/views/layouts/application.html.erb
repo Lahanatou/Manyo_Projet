@@ -10,6 +10,9 @@
   </head>
 
   <body>
+     <%= link_to 'Tasks Index', tasks_path ,class:'fs-20 btn btn-outline-dark'%>
+     <br>
+     <%= link_to 'New Tasks', new_task_path ,class:'fs-20 btn btn-outline-dark'%>
     <%= yield %>
   </body>
 </html>
