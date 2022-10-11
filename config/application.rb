@@ -9,6 +9,10 @@ Bundler.require(*Rails.groups)
 module CdpWebManyoTask
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
+    config.time_zone = 'Asia/Tokyo'
+    config.active_record.default_timezone = :local
+    I18n.available_locales = [:en, :fr]
+    config.i18n.default_locale = :fr
     config.load_defaults 6.0
 
     # Settings in config/environments/* take precedence over those specified here.

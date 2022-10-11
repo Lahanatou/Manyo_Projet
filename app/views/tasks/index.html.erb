@@ -16,7 +16,7 @@
       <tr>
         <td><%= task.title %></td>
         <td><%= task.content %></td>
-        <td><%= task.created_at.strftime('%Y/%-m/%-d') %></td>
+        <td><%= task.created_at || Time.now %></td>
         <td><%= link_to 'Show', task %></td>
         <td><%= link_to 'Edit', edit_task_path(task) %></td>
         <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -28,3 +28,5 @@
 <br>
 
 <%= link_to 'New Task', new_task_path %>
+<hr>
+    <%= paginate @tasks, class:"mt-5" %>
