@@ -3,12 +3,20 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
+    if params[:sort_expired]
+      @tasks=Task.orderByDeadline.kaminari(params[:page])
+    elsif
+    @tasks=Task.orderByPriority.kaminari(params[:page])
+    else
     #@tasks = Task.all
     @tasks = Task.orderByCreated_at .kaminari(params[:page])
   end
+  end
+
 
   # GET /tasks/1 or /tasks/1.json
   def show
+    #@task = Task.find(params[:id])
   end
 
   # GET /tasks/new
@@ -23,7 +31,7 @@ class TasksController < ApplicationController
   # POST /tasks or /tasks.json
   def create
     @task = Task.new(task_params)
-
+#@task.status= @task.status-1
     respond_to do |format|
       if @task.save
         format.html { redirect_to task_url(@task), notice: "Task was successfully created." }
@@ -58,14 +66,49 @@ class TasksController < ApplicationController
     end
   end
 
+  def search
+      session[:search] = {'title' => params[:search_title], 'status' => params[:search_status]}
+      @tasks = researched.ordered
+      @search_title = session[:search]['title']
+      render :index
+    end
+
+    def sort
+          @tasks = researched.ordered
+          @search_title = session[:search]['title']  if session[:search].present?
+          session[:search] = nil
+          render :index
+        end
+
+        def researched
+                if session[:search].present?
+                  if session[:search]['title'].blank? && session[:search]['status'].blank?
+
+                  Task.all.kaminari(params[:page])
+                else
+                  tasks = Task.all
+
+
+                  if session[:search]['title'].present?
+                    tasks = tasks.title_sort(session[:search]['title']).kaminari(params[:page])
+
+                  end
+
+                  if session[:search]['status'].present?
+                    tasks = tasks.status_sort(session[:search]['status']).kaminari(params[:page])
+                  end
+                    tasks.kaminari(params[:page])
+                  end
+                end
+              end
+
+
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_task
       @task = Task.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:title, :content)
+      params.require(:task).permit(:title, :content,:deadline,:priority,:status)
     end
 end

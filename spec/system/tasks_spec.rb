@@ -69,4 +69,53 @@ RSpec.describe 'Fonctions de gestion des tâches', type: :system do
        end
      end
   end
+
+
+  describe 'Listing function' do.
+   # omit
+   describe 'Sort function' do
+     context "If you click on the link 'Sort by End Due Date" do
+       it "The list of tasks sorted by end deadline in ascending order is displayed." do
+         # Use the all method to check the sort order of multiple test data
+       end
+     end
+     context "If you click on the link 'Sort by priority" do
+       it 'The list of tasks sorted by priority is displayed.' do
+         # Use the all method to check the sort order of multiple test data
+       end
+     end
+   end
+   describe 'Listing function' do.
+   # omit
+   describe 'Sort function' do
+     context "If you click on the link 'Sort by End Due Date" do
+       it "La liste des tâches triées par échéance en ordre croissant s'affiche.." do
+         # Use the all method to check the sort order of multiple test data
+       end
+     end
+     context "If you click on the link 'Sort by priority" do
+       it "La liste des tâches triées par priorité s'affiche." do
+         # Use the all method to check the sort order of multiple test data
+       end
+     end
+   end
+   describe 'Search function' do
+     context 'If you do a fuzzy search by title' do
+       it 'Seules les tâches contenant le terme de recherche seront affichées' do.
+         # Use the to and not_to matcher to check both what is displayed and what is not
+       end
+     end
+     context 'Search by status' do
+       it "Seules les tâches correspondant à l'état recherché seront affichées." do.
+         # Use the to and not_to matchers to check both what is displayed and what is not
+       end
+     end
+     context 'Search by title and status' do
+       it 'Seules les tâches qui contiennent le terme de recherche dans le titre et qui correspondent au statut seront affichées.d' do.
+         # Check both what is and is not displayed using the to and not_to matcher
+      end
+     end
+   end
+ end
+   end
 end

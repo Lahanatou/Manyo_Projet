@@ -15,5 +15,18 @@
   <strong>create_time:</strong>
   <%= @task.created_at %>
 </p>
+
+<p>
+  <strong>Deadline:</strong>
+  <%= @task.deadline %>
+</p>
+<p>
+  <strong>Priority:</strong>
+  <%= @task.priority %>
+</p>
+<p>
+  <strong>Status:</strong>
+  <%= @task.status %>
+</p>
 <%= link_to 'Edit', edit_task_path(@task) %> |
 <%= link_to 'Back', tasks_path %>
