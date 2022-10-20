@@ -23,17 +23,17 @@
 <br><br>
 <div class="field">
   <h3><%= form.label :deadline %></h3>
-  <%= form.date_field :deadline, placeholder: 'Deadline' %>
+  <%= form.date_field :deadline, placeholder: "Task' deadline" %>
 </div>
 <br><br>
 <div class="field">
 <h3><%= form.label :priority, 'Priority' %></h3>
-  <%= form.select :priority,["",'low','medium','high'], placeholder: 'choose a priority' %>
+  <%= form.select :priority,['low','medium','high'], prompt: 'choose a priority' %>
 </div>
 <br><br>
 <div class="field">
 <h3><%= form.label :status, 'Status' %></h3>
-  <%= form.select :status, ["",'pending','started','completed'], placeholder: 'Status' %>
+  <%= form.select :status, ['pending','started','completed'], prompt: "Choose task' status"%>
 </div>
   <div class="actions">
     <%= form.submit %>

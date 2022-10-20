@@ -16,7 +16,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/1 or /tasks/1.json
   def show
-    #@task = Task.find(params[:id])
+  @task = Task.find(params[:id])
   end
 
   # GET /tasks/new
@@ -26,6 +26,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
+    kkkkkl
   end
 
   # POST /tasks or /tasks.json
@@ -46,6 +47,7 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
     respond_to do |format|
+      @user = User.find(params[:id])
       if @task.update(task_params)
         format.html { redirect_to task_url(@task), notice: "Task was successfully updated." }
         format.json { render :show, status: :ok, location: @task }
@@ -70,7 +72,11 @@ class TasksController < ApplicationController
       session[:search] = {'title' => params[:search_title], 'status' => params[:search_status]}
       @tasks = researched.ordered
       @search_title = session[:search]['title']
+      puts"hhhhhhhhhhhhhhhh"
+      puts @search_title
+      puts"hhhhhhhhhhhhhhhh"
       render :index
+
     end
 
     def sort
@@ -105,7 +111,7 @@ class TasksController < ApplicationController
 
   private
     def set_task
-      @task = Task.find(params[:id])
+      #@task = Task.find(params[:id])
     end
 
     def task_params
