@@ -10,9 +10,9 @@
               <% if defined? @search_title %>
                 <%= f.text_field :search_title, value: @search_title %>
               <% else %>
-              <%= f.text_field :search_title %>
+              <%= f.text_field :search_title, placeholder: "Write task title here"  %>
               <% end %>
-                <%= f.select :search_status, Task.statuses.map { |k, v| [k, v] }, prompt: 'status'%>
+                <%= f.select :search_status, Task.statuses.map { |k, v| [k, v] }, prompt: 'Choose task status here'%>
                 <%= f.submit 'search' ,class:'btn btn-light'%>
               <% end %>
             </div>

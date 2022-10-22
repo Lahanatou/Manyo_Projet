@@ -26,7 +26,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
-    kkkkkl
+      @task = Task.find(params[:id])
   end
 
   # POST /tasks or /tasks.json
@@ -47,7 +47,7 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
     respond_to do |format|
-      @user = User.find(params[:id])
+      @task = Task.find(params[:id])
       if @task.update(task_params)
         format.html { redirect_to task_url(@task), notice: "Task was successfully updated." }
         format.json { render :show, status: :ok, location: @task }
