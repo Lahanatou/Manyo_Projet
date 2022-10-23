@@ -21,6 +21,21 @@
     <%= form.text_area :content %>
   </div>
 <br><br>
+<div class="field">
+  <h3><%= form.label :deadline, 'Indicate the deadline of your task'  %></h3>
+  <%= form.date_field :deadline, placeholder: "Task' deadline" %>
+</div>
+<br><br>
+<div class="field">
+<h3><%= form.label :priority, "Select your task' Priority" %></h3>
+  <%= form.select :priority,["",'low','medium','high'] %>
+</div>
+<br><br>
+<div class="field">
+<h3><%= form.label :status, "Select your task' Status" %></h3>
+  <%= form.select :status, ["", 'pending','started','completed']%>
+</div>
+<br>
   <div class="actions">
     <%= form.submit %>
   </div>

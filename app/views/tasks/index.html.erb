@@ -1,13 +1,38 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Tasks</h1>
+<div class="container shadow">
+<h1>Make your research here</h1>
 
+        <div class="row py-3">
+          <div class="col sm-3">
+            <div class="col">
+              <%= form_with(url: tasks_rechercher_path, method: :get, local: true) do |f| %>
+              <% if defined? @search_title %>
+                <%= f.text_field :search_title, value: @search_title %>
+              <% else %>
+              <%= f.text_field :search_title, placeholder: "Write task title here"  %>
+              <% end %>
+                <%= f.select :search_status, Task.statuses.map { |k, v| [k, v] }, prompt: 'Choose task status here'%>
+                <%= f.submit 'search' ,class:'btn btn-light'%>
+              <% end %>
+            </div>
+          </div>
+        </div>
+    <div class="container py-3">
+
+
+<h1>Tasks List</h1>
+<div class="container1 py-3">
+<% if @tasks.present? %>
 <table>
   <thead>
     <tr>
       <th>Title</th>
       <th>Content</th>
       <th>create_time</th>
+      <th><%= link_to "Deadline", tasks_path(sort_expired: "true")%></th>
+      <th><%= link_to "Priority", tasks_path(sort_priority: "true")%></th>
+      <th>Status</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,6 +42,9 @@
         <td><%= task.title %></td>
         <td><%= task.content %></td>
         <td><%= task.created_at || Time.now %></td>
+        <td><%= task.deadline.strftime('%Y/%-m/%-d') %></td>
+        <td><%= task.priority %></td>
+        <td><%= task.status %></td>
         <td><%= link_to 'Show', task %></td>
         <td><%= link_to 'Edit', edit_task_path(task) %></td>
         <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -24,6 +52,11 @@
     <% end %>
   </tbody>
 </table>
+<% else %>
+
+   <h3><p>Pas de task correspondant à votre votre recherche</p></h3>
+<% end %>
+</div>
 
 <br>
 
