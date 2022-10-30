@@ -9,7 +9,7 @@ class TasksController < ApplicationController
     @tasks=Task.orderByPriority.kaminari(params[:page])
     else
     #@tasks = Task.all
-    @tasks = Task.orderByCreated_at .kaminari(params[:page])
+    @tasks = Task.orderByCreated_at.kaminari(params[:page])
   end
   end
 
@@ -76,7 +76,6 @@ class TasksController < ApplicationController
       puts @search_title
       puts"hhhhhhhhhhhhhhhh"
       render :index
-
     end
 
     def sort
@@ -107,8 +106,6 @@ class TasksController < ApplicationController
                   end
                 end
               end
-
-
   private
     def set_task
       #@task = Task.find(params[:id])
