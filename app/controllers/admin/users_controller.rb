@@ -5,7 +5,8 @@ class Admin::UsersController < ApplicationController
     PER = 10
 
     def index
-    @users = User.select(:id, :name, :email, :admin).order(created_at: :asc).page(params[:page]).per(PER)
+    #@users = User.select(:id, :name, :email, :admin).order(created_at: :asc).page(params[:page]).per(PER)
+    @users = User.all.order(created_at: :asc).page(params[:page]).per(PER)
     end
 
   def new
