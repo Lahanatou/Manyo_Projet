@@ -1,0 +1,38 @@
+<div class="container">
+    <%= form_with(model: [:admin, @user], local: true) do |f| %>
+      <%= render 'errormsg/error', variable: @user %>
+      <table>
+        <tr>
+          <td><%= f.label :name, 'Name' %></td>
+          <td><%= f.text_field :name %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :email, 'Email address' %></td>
+          <td><%= f.email_field :email %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :admin, 'Admin' %></td>
+          <%= f.hidden_field :admin, value: false %>
+          <td><%= f.check_box :admin, {}, true, false %></td>
+        </tr>
+      </table>
+      <hr>
+      <p><b>If you want to change your password, please also enter the following</b></p>
+      <table>
+        <tr>
+          <td><%= f.label :password, 'Password' %></td>
+          <td><%= f.password_field :password %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :password_confirmation, 'Password confirmation' %></td>
+          <td><%= f.password_field :password_confirmation %></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td><%= f.submit 'Approve' ,class:'btn btn-dark'%></td>
+        <tr>
+      </table>
+    <% end %>
+    <hr>
+    <%= link_to 'Delete user data', admin_user_path(@user.id), method: :delete, data: { confirm: 'Are you sure you want to delete it?' },class:'btn btn-danger' %>
+  </div>

@@ -1,0 +1,45 @@
+<div class="container">
+  <h4>La page de <%= @user.name %></h4>
+  <% if @tasks.present? %>
+    <div class="user_tasks">
+      <% @tasks.each do |task| %>
+        <div class="task">
+          <div class="task_header">
+            <div class="task_status">
+              <%= task.status %>
+            </div>
+            <h4 class="task_name task_row"><%= task.title %></h4>
+            <div class="task_priority">
+              <%= task.priority %>
+            </div>
+            <%= link_to 'show', task_path(task.id), class: 'task_show' %>
+            <%= link_to 'edit', edit_task_path(task.id) %>
+            <%= link_to 'destroy', task_path(task.id), method: :delete, data: { confirm: 'Are you sure you want to delete?' } %>
+          </div>
+          <div class="task_content">
+            <%= task.content %>
+          </div>
+          <div class="task_deadline">
+            <% deadline_date = task.deadline.to_date %>
+            <% num = (deadline_date - Date.today).to_i %>
+            <% if num.negative? %>
+              <%= 'The expiration date has passed' %>
+            <% else %>
+              <%= "after #{num} Day" %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <h2><%= 'There is no task created by this user' %></h2>
+    <br>
+
+  <h2>  <%= 'You can create one by click on the link above' %> </h2>
+    <br>
+    <%= link_to 'Create New Task', new_task_path %>
+  <% end %>
+  <div class="page">
+    <%= paginate @tasks %>
+  </div>
+</div>

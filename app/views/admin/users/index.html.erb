@@ -1,0 +1,18 @@
+Ctgrw       DQAQ        d<div class="container">
+    <%= link_to 'New user registration', new_admin_user_path ,class:'btn btn-primary'%>
+    <div class="users py-3">
+      <table>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= link_to user.name, user_path(user.id) ,class:'text-light fs-16'%></td>
+            <td>Number of tasks: <span class="text-dark"><%= user.tasks.count%></span></td>
+            <td>
+            <%= link_to 'Edit/Delete', edit_admin_user_path(user.id) ,class:'btn btn-light  '%>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+  <hr>
+      <%= paginate @users, class:"mt-5" %>

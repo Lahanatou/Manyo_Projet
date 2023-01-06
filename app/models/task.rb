@@ -1,6 +1,7 @@
 class Task < ApplicationRecord
   validates :title,:content, null:false,presence: true, length: { minimum: 1 }
   validates :deadline, :priority, :status, null:false,presence: true
+  belongs_to :user
   scope :orderByCreated_at, -> { order(created_at: :desc) }
   scope :orderByDeadline,->{order(deadline: :asc) }
   scope :kaminari, -> (kaminari_page){ page(kaminari_page).per(10) }
