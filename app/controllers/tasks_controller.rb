@@ -4,12 +4,12 @@ class TasksController < ApplicationController
   # GET /tasks or /tasks.json
   def index
     if params[:sort_expired]
-      @tasks=Task.orderByDeadline.kaminari(params[:page])
+      @tasks=current_user.tasks.orderByDeadline.kaminari(params[:page])
     elsif
-    @tasks=Task.orderByPriority.kaminari(params[:page])
+    @tasks=current_user.tasks.orderByPriority.kaminari(params[:page])
     else
     #@tasks = Task.all
-    @tasks = Task.orderByCreated_at .kaminari(params[:page])
+    @tasks =current_user.tasks.orderByCreated_at .kaminari(params[:page])
   end
   end
 
@@ -31,7 +31,7 @@ class TasksController < ApplicationController
 
   # POST /tasks or /tasks.json
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.new(task_params)
 #@task.status= @task.status-1
     respond_to do |format|
       if @task.save
@@ -59,6 +59,8 @@ class TasksController < ApplicationController
   end
 
   # DELETE /tasks/1 or /tasks/1.json
+
+
   def destroy
     @task = Task.find params[:id]
     @task.destroy
@@ -90,7 +92,8 @@ class TasksController < ApplicationController
                 if session[:search].present?
                   if session[:search]['title'].blank? && session[:search]['status'].blank?
 
-                  Task.all.kaminari(params[:page])
+                  #Task.all.kaminari(params[:page])
+                  Task.current_user_sort(current_user.id).kaminari(params[:page])
                 else
                   tasks = Task.all
 

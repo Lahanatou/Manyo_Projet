@@ -11,6 +11,28 @@
 #       content: "task detail#{i + 1}",
 #     )
 # end
+
+
+User.create(name:"Admin",
+           email:'nouryous30@gmail.com',
+        password:'firstadmin123456',
+           admin:true)
+  @tasks=Task.where(user_id:nil)
+  @tasks.each do |e|
+  e.update(user_id:1)
+end
+
+
+
+15.times do |i|
+    User.create(
+        name: "Abdallah#{i}name",
+        email: "abdallahemail#{i}@gmail.com",
+        password: "password"
+    )
+end
+
+
 status = ['pending', 'started', 'completed']
 priority = ['low', 'medium', 'high']
 
