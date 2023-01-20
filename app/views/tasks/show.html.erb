@@ -28,5 +28,15 @@
   <strong>Status:</strong>
   <%= @task.status %>
 </p>
-<%= link_to 'Edit', edit_task_path(@task) %> |
-<%= link_to 'Back', tasks_path %>
+
+<p>
+   <strong>Label assigned:</strong>
+ <% if @task.labels.present? %>
+           <% @task.labels.each do |l| %>
+             <span class="label"><%= l.name %></span>
+           <% end %>
+ <% end %>
+ </p>
+
+<%= link_to 'Edit', edit_task_path(@task) ,class: 'btn btn-secondary text-light'%>
+<%= link_to 'Back', tasks_path ,class: 'btn btn-secondary text-light'%>

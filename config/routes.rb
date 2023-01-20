@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   #resources :tasks
   resources :users, only: %i[new create show]
   resources :sessions, only: %i[new create destroy]
+  resources :labels, only: %i[new create]
   #root :to => "tasks#index"
   get "/rechercher" ,to: "tasks#search", as: "tasks_rechercher"
   resources :tasks do

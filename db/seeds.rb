@@ -47,3 +47,10 @@ priority = ['low', 'medium', 'high']
       priority: priority[rand(3)]
     )
 end
+
+
+20.times do |n|
+    Label.create(
+        name: "tag_#{n}_#{n-12}"
+    )
+end

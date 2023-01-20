@@ -5,38 +5,93 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body style="background-color:LightSlateGrey;font-family:Verdana">
+  <style>
+    p ,h1,label,th,td{
+       color: white;
+    }
+
+
+    td{
+      font-family: cursive;
+      font-size: 16px;
+    }
+
+
+    select{
+       padding: 10px;
+     }
+     label{
+       font-size: 20px;
+       margin-bottom: 5px;
+       text-decoration: underline;
+       float: center;
+     }
+  </style>
+
+
+  <body style="background-color:#808080;font-family:Verdana">
      <header class="shadow p-3 mb-5 bg-white rounded">
        <ul class="nav justify-content-center bg-blue">
        <% if logged_in? %>
        <li>
-           <%= link_to 'Task details', tasks_path ,class:'fs-20 btn btn-outline-dark'%>
+           <%= link_to 'Task details', tasks_path ,class:'fs-20 btn btn-outline-dark'%> ||
          </li>
+
          <li>
-           <%= link_to 'Ma page', user_path(current_user.id) ,class:'btn fs-20 btn-outline-dark'%>
+           <%= link_to 'Register a Task', new_task_path ,class:'fs-20 btn btn-outline-dark'%> ||
+         </li>
+
+          <li>
+            <%= link_to "Register a Label", new_label_path ,class:'fs-20 btn btn-outline-dark'%> ||
+          </li>
+
+         <li>
+           <%= link_to 'Ma page', user_path(current_user.id) ,class:'btn fs-20 btn-outline-dark'%> ||
          </li>
          <li>
            <%= link_to 'Log out', session_path(current_user.id), method: :delete, data: {confirm: 'Are you sure you want to log out?'} ,class:'btn fs-20 btn-outline-dark'%>
          </li>
            <% if current_user.admin?%>
            <li>
-             <%= link_to 'Management', admin_users_path ,class:'btn fs-20 btn-outline-dark'%>
+             <%= link_to 'Management', admin_users_path ,class:'btn fs-20 btn-outline-dark'%> ||
            </li>
          <% end %>
      <% else %>
        <li>
-         <%= link_to 'User registration', new_user_path ,class:'btn fs-20'%>
+         <%= link_to 'User registration', new_user_path ,class:'fs-20 btn btn-outline-dark'%> ||
        </li>
        <li>
-         <%= link_to 'Login', new_session_path,class:'btn fs-20' %>
+         <%= link_to 'Login', new_session_path,class:'fs-20 btn btn-outline-dark'%>
        </li>
      <% end %>
        </ul>
      </header>
      <%= yield %>
+     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
    </body>
+
+
+
+ <div class="card-footer text-center" style="position: fixed;
+ left: 0;
+ bottom: 0;
+ width: 100%;
+ color: green;
+ text-align: center;">
+   <div class="nav justify-content-center">
+
+ </div>
+ </div>
+
+
+
 </html>

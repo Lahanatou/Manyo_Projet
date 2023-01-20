@@ -11,6 +11,7 @@ class TasksController < ApplicationController
     #@tasks = Task.all
     @tasks =current_user.tasks.orderByCreated_at .kaminari(params[:page])
   end
+    @labels = Label.where(user_id: nil).or(Label.where(user_id: current_user.id))
   end
 
 
@@ -22,11 +23,13 @@ class TasksController < ApplicationController
   # GET /tasks/new
   def new
     @task = Task.new
+    @label = @task.labelings.build
+    @labels = Label.where(user_id: nil).or(Label.where(user_id: current_user.id))
   end
 
   # GET /tasks/1/edit
   def edit
-      @task = Task.find(params[:id])
+      @labels = Label.where(user_id: nil).or(Label.where(user_id: current_user.id))
   end
 
   # POST /tasks or /tasks.json
@@ -71,7 +74,8 @@ class TasksController < ApplicationController
   end
 
   def search
-      session[:search] = {'title' => params[:search_title], 'status' => params[:search_status]}
+      session[:search] = {'title' => params[:search_title], 'status' => params[:search_status],'label'=>params[:search_label]}
+       @labels = Label.where(user_id: nil).or(Label.where(user_id: current_user.id))
       @tasks = researched.ordered
       @search_title = session[:search]['title']
       puts"hhhhhhhhhhhhhhhh"
@@ -84,13 +88,14 @@ class TasksController < ApplicationController
     def sort
           @tasks = researched.ordered
           @search_title = session[:search]['title']  if session[:search].present?
+          @labels = Label.where(user_id: nil).or(Label.where(user_id: current_user.id))
           session[:search] = nil
           render :index
         end
 
         def researched
                 if session[:search].present?
-                  if session[:search]['title'].blank? && session[:search]['status'].blank?
+                  if session[:search]['title'].blank? && session[:search]['status'].blank? && session[:search]['label'].blank?
 
                   #Task.all.kaminari(params[:page])
                   Task.current_user_sort(current_user.id).kaminari(params[:page])
@@ -106,6 +111,9 @@ class TasksController < ApplicationController
                   if session[:search]['status'].present?
                     tasks = tasks.status_sort(session[:search]['status']).kaminari(params[:page])
                   end
+                  if session[:search]['label'].present?
+                    tasks = tasks.label_sort(session[:search]['label']).kaminari(params[:page])
+                  end
                     tasks.kaminari(params[:page])
                   end
                 end
@@ -114,10 +122,10 @@ class TasksController < ApplicationController
 
   private
     def set_task
-      #@task = Task.find(params[:id])
+      @task = Task.find(params[:id])
     end
 
     def task_params
-      params.require(:task).permit(:title, :content,:deadline,:priority,:status)
+      params.require(:task).permit(:title, :content,:deadline,:priority,:status, label_ids: [])
     end
 end

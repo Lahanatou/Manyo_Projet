@@ -7,7 +7,7 @@ require 'rails_helper'
 
    @user = User.create!(id:1, name: 'user', email: "user@gmail.com", password: "00000000")
 
-   @user = User.create!(id:2, name: 'user2', email: "user2@gmail.com", password: "11111111")
+  # @user = User.create!(id:2, name: 'user2', email: "user2@gmail.com", password: "11111111")
 
    @admin_user = User.create!(id:20, name: 'admin', email: "admin@gmail.com", password: "99999999", admin: true)
 
@@ -103,7 +103,7 @@ require 'rails_helper'
 
        it 'Access to user details screen' do
          visit admin_users_path
-         click_link 'Edit/Delete', href: edit_admin_user_path(2)
+         click_link 'Edit/Delete', href: edit_admin_user_path(1)
         fill_in 'user[name]', with: 'user'
         fill_in 'user[password]', with: '00000000'
         fill_in 'user[password_confirmation]', with: '00000000'
